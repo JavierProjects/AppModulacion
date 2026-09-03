@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Laboratorio interactivo para explorar modulaciones analógicas, por pulsos y digitales.">
+  <title>Laboratorio de Modulación</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Telecomunicaciones · Laboratorio interactivo</p>
+      <h1>Modulación de señales</h1>
+    </div>
+    <div class="top-actions" aria-label="Controles de animación">
+      <button id="playPause" class="icon-button primary" type="button" aria-label="Pausar animación">
+        <span id="playIcon" aria-hidden="true">Ⅱ</span><span id="playText">Pausar</span>
+      </button>
+      <button id="resetAnimation" class="icon-button" type="button" aria-label="Reiniciar animación">
+        <span aria-hidden="true">↺</span><span>Reiniciar</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="modulation-picker" aria-label="Seleccionar modulación">
+      <section class="family-group" aria-labelledby="family-analog">
+        <div class="family-label"><span class="family-dot analog"></span><span id="family-analog">Analógica</span></div>
+        <div class="mode-buttons">
+          <button class="mode-button active" type="button" data-mode="AM">AM</button>
+          <button class="mode-button" type="button" data-mode="FM">FM</button>
+          <button class="mode-button" type="button" data-mode="PM">PM</button>
+        </div>
+      </section>
+
+      <section class="family-group" aria-labelledby="family-pulse">
+        <div class="family-label"><span class="family-dot pulse"></span><span id="family-pulse">Por pulsos</span></div>
+        <div class="mode-buttons">
+          <button class="mode-button" type="button" data-mode="PAM">PAM</button>
+          <button class="mode-button" type="button" data-mode="PWM">PWM</button>
+          <button class="mode-button" type="button" data-mode="PPM">PPM</button>
+          <button class="mode-button" type="button" data-mode="PCM">PCM</button>
+        </div>
+      </section>
+
+      <section class="family-group" aria-labelledby="family-digital">
+        <div class="family-label"><span class="family-dot digital"></span><span id="family-digital">Digital de portadora</span></div>
+        <div class="mode-buttons">
+          <button class="mode-button" type="button" data-mode="ASK">ASK</button>
+          <button class="mode-button" type="button" data-mode="FSK">FSK</button>
+          <button class="mode-button" type="button" data-mode="PSK">PSK</button>
+          <button class="mode-button" type="button" data-mode="QAM">QAM</button>
+        </div>
+      </section>
+    </nav>
+
+    <section class="concept-card" aria-live="polite">
+      <div class="concept-main">
+        <div class="mode-title-row">
+          <span id="modeBadge" class="mode-badge">AM</span>
+          <div>
+            <h2 id="modeTitle">Modulación en amplitud</h2>
+            <p id="modeSummary">La señal de información modifica continuamente la amplitud de la portadora.</p>
+          </div>
+        </div>
+        <div id="changeFlow" class="change-flow" aria-label="Relación entre información y portadora"></div>
+      </div>
+      <div id="propertyIndicators" class="property-indicators"></div>
+    </section>
+
+    <div class="view-tabs" role="tablist" aria-label="Modo de aprendizaje">
+      <button id="simulatorTabButton" class="view-tab active" type="button" role="tab" aria-selected="true" aria-controls="simulatorTab" data-view="simulator">
+        <span aria-hidden="true">◉</span> Simulador
+      </button>
+      <button id="practiceTabButton" class="view-tab" type="button" role="tab" aria-selected="false" aria-controls="practiceTab" data-view="practice">
+        <span aria-hidden="true">✓</span> Práctica guiada
+      </button>
+      <p class="recommended-order"><strong>Orden recomendado:</strong> AM → FM → PM → PAM → PWM → PPM → PCM → ASK → FSK → PSK → QAM</p>
+    </div>
+
+    <section id="simulatorTab" class="view-panel" role="tabpanel" aria-labelledby="simulatorTabButton">
+      <div id="activeTaskBanner" class="active-task-banner hidden" aria-live="polite">
+        <div>
+          <span id="activeTaskLabel" class="task-label"></span>
+          <p id="activeTaskText"></p>
+        </div>
+        <button id="backToGuide" class="secondary-button" type="button">Volver a la guía</button>
+      </div>
+
+      <div class="workspace">
+      <aside class="control-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Experimenta</p>
+            <h2>Controles</h2>
+          </div>
+          <button id="defaultsButton" class="text-button" type="button">Valores predeterminados</button>
+        </div>
+
+        <div id="bitInputGroup" class="control-group hidden">
+          <label for="bitSequence">Secuencia de bits</label>
+          <div class="bit-input-row">
+            <input id="bitSequence" type="text" inputmode="numeric" value="10110010" maxlength="16" aria-describedby="bitHelp">
+            <button id="randomBits" type="button" aria-label="Generar secuencia aleatoria">Aleatoria</button>
+          </div>
+          <p id="bitHelp" class="control-help">Escribe entre 4 y 16 bits. En QAM se agrupan de dos en dos.</p>
+        </div>
+
+        <div id="dynamicControls"></div>
+
+        <details class="math-details">
+          <summary>Ver modelo matemático</summary>
+          <div id="equation" class="equation"></div>
+          <p id="equationNote" class="equation-note"></p>
+        </details>
+
+      </aside>
+
+      <section class="visualization-panel" aria-label="Visualización de señales">
+        <div class="scope-toolbar">
+          <div class="legend" aria-label="Leyenda">
+            <span><i class="legend-line info"></i>Información</span>
+            <span><i class="legend-line reference"></i>Referencia</span>
+            <span><i class="legend-line output"></i>Modulada</span>
+          </div>
+          <div class="scope-actions">
+            <div class="time-status"><span class="live-dot"></span><span id="timeStatus">Animación activa</span></div>
+            <button id="exportPng" class="export-button" type="button" title="Descargar las tres gráficas en PNG" aria-label="Descargar las tres gráficas en formato PNG">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M7 14h10v7H7z"/>
+                <circle cx="18" cy="11" r="1" class="printer-dot"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <article class="scope-card">
+          <div class="scope-title">
+            <div><span class="plot-number">01</span><h3 id="plot1Title">Señal de información · m(t)</h3></div>
+            <span id="plot1Meta">Senoidal</span>
+          </div>
+          <canvas id="plot1" role="img" aria-label="Gráfica de la señal de información"></canvas>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-title">
+            <div><span class="plot-number">02</span><h3 id="plot2Title">Portadora · c(t)</h3></div>
+            <span id="plot2Meta">Referencia</span>
+          </div>
+          <canvas id="plot2" role="img" aria-label="Gráfica de la señal portadora o de referencia"></canvas>
+        </article>
+
+        <article class="scope-card output-card">
+          <div class="scope-title">
+            <div><span class="plot-number">03</span><h3 id="plot3Title">Señal modulada · s(t)</h3></div>
+            <span id="plot3Meta">Resultado</span>
+          </div>
+          <canvas id="plot3" role="img" aria-label="Gráfica de la señal modulada"></canvas>
+        </article>
+
+        <section id="specialView" class="special-view hidden" aria-live="polite">
+          <div class="special-heading">
+            <div>
+              <p id="specialKicker" class="section-kicker">Vista complementaria</p>
+              <h3 id="specialTitle"></h3>
+            </div>
+            <p id="specialDescription"></p>
+          </div>
+          <canvas id="specialCanvas" role="img" aria-label="Visualización complementaria"></canvas>
+          <div id="pcmPipeline" class="pcm-pipeline hidden"></div>
+        </section>
+      </section>
+      </div>
+    </section>
+
+    <section id="practiceTab" class="view-panel practice-panel hidden" role="tabpanel" aria-labelledby="practiceTabButton">
+      <div class="practice-header">
+        <div>
+          <p class="section-kicker">Aprende experimentando</p>
+          <h2 id="practiceTitle">Práctica guiada · AM</h2>
+          <p id="practiceObjective"></p>
+        </div>
+        <span id="practicePosition" class="practice-position">1 de 11</span>
+      </div>
+
+      <nav id="practiceOrder" class="practice-order" aria-label="Orden recomendado de prácticas"></nav>
+
+      <div class="practice-shell">
+        <aside class="practice-navigation">
+          <p class="practice-nav-title">Etapas de la práctica</p>
+          <div id="practiceStageButtons" class="practice-stage-buttons"></div>
+          <div class="practice-progress-track" aria-hidden="true"><span id="practiceProgressBar"></span></div>
+          <p id="practiceProgressText" class="practice-progress-text"></p>
+        </aside>
+
+        <article id="practiceContent" class="practice-content" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <footer>
+      <p>Compara siempre los tres ejes en el mismo instante. La línea vertical muestra el punto actual de observación.</p>
+      <p>Laboratorio conceptual: las escalas están optimizadas para visualizar el fenómeno.</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
