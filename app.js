@@ -1302,7 +1302,13 @@ function exportGraphsAsPng() {
   const graphHeader = 64;
   const gap = 28;
   const headerHeight = 176;
-  const height = headerHeight + 3 * (graphHeader + graphHeight) + 2 * gap + 72;
+  const hasConstellation = state.mode === "PSK" || state.mode === "QAM";
+  const hasPcmProcess = state.mode === "PCM";
+  const hasSpecialExport = hasConstellation || hasPcmProcess;
+  const specialHeight = hasSpecialExport ? 350 : 0;
+  const specialGap = hasSpecialExport ? gap : 0;
+  const graphsBottom = headerHeight + 3 * (graphHeader + graphHeight) + 2 * gap;
+  const height = graphsBottom + specialGap + specialHeight + 72;
   exportCanvas.width = width;
   exportCanvas.height = height;
   const ctx = exportCanvas.getContext("2d");
@@ -1366,9 +1372,104 @@ function exportGraphsAsPng() {
     ctx.drawImage(source, margin + 10, top + graphHeader, graphWidth - 20, graphHeight - 8);
   });
 
+  if (hasSpecialExport) {
+    const top = graphsBottom + specialGap;
+    const cardHeight = specialHeight;
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.roundRect(margin, top, graphWidth, cardHeight, 18);
+    ctx.fill();
+    ctx.strokeStyle = "#dfe5ee";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = COLORS.navy;
+    ctx.font = "750 27px ui-sans-serif, sans-serif";
+    ctx.textAlign = "left";
+
+    if (hasConstellation) {
+      const constellationTitle = state.mode === "PSK" ? "Constelación BPSK" : `Constelación ${state.qamOrder}-QAM`;
+      ctx.fillText(`04  ${constellationTitle}`, margin + 30, top + 49);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = "500 18px ui-sans-serif, sans-serif";
+      ctx.fillText("Plano I–Q: cada punto representa un símbolo posible.", margin + 30, top + 82);
+
+      const sourceRatio = els.specialCanvas.width / Math.max(els.specialCanvas.height, 1);
+      const imageHeight = cardHeight - 102;
+      const imageWidth = Math.min(graphWidth - 80, imageHeight * sourceRatio);
+      const imageX = margin + (graphWidth - imageWidth) / 2;
+      ctx.drawImage(els.specialCanvas, imageX, top + 92, imageWidth, imageHeight - 12);
+    }
+
+    if (hasPcmProcess) {
+      const bitsPerSample = Math.ceil(Math.log2(state.quantLevels));
+      ctx.fillText("04  Proceso de modulación PCM", margin + 30, top + 49);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = "500 18px ui-sans-serif, sans-serif";
+      ctx.fillText("La señal analógica se transforma en una secuencia de palabras binarias.", margin + 30, top + 82);
+
+      const stages = [
+        ["1 · Señal", "m(t) continua"],
+        ["2 · Muestreo", `${state.sampleRate} muestras/s`],
+        ["3 · Cuantización", `${state.quantLevels} niveles`],
+        ["4 · Codificación", `${bitsPerSample} bits/muestra`]
+      ];
+      const pipelineX = margin + 38;
+      const pipelineY = top + 126;
+      const arrowWidth = 66;
+      const availableWidth = graphWidth - 76;
+      const boxWidth = (availableWidth - arrowWidth * (stages.length - 1)) / stages.length;
+      const boxHeight = 132;
+
+      stages.forEach(([title, detail], index) => {
+        const x = pipelineX + index * (boxWidth + arrowWidth);
+        ctx.fillStyle = index === stages.length - 1 ? "#f2efff" : "#f4fbfc";
+        ctx.beginPath();
+        ctx.roundRect(x, pipelineY, boxWidth, boxHeight, 15);
+        ctx.fill();
+        ctx.strokeStyle = index === stages.length - 1 ? "#7357d6" : "#13a8b7";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = COLORS.navy;
+        ctx.font = "750 21px ui-sans-serif, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(title, x + boxWidth / 2, pipelineY + 53);
+        ctx.fillStyle = COLORS.text;
+        ctx.font = "600 17px ui-sans-serif, sans-serif";
+        ctx.fillText(detail, x + boxWidth / 2, pipelineY + 88);
+
+        if (index < stages.length - 1) {
+          const arrowX = x + boxWidth + arrowWidth / 2;
+          const arrowY = pipelineY + boxHeight / 2;
+          ctx.strokeStyle = "#8b98aa";
+          ctx.lineWidth = 4;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(arrowX - 17, arrowY);
+          ctx.lineTo(arrowX + 16, arrowY);
+          ctx.lineTo(arrowX + 6, arrowY - 10);
+          ctx.moveTo(arrowX + 16, arrowY);
+          ctx.lineTo(arrowX + 6, arrowY + 10);
+          ctx.stroke();
+        }
+      });
+
+      ctx.fillStyle = COLORS.text;
+      ctx.font = "600 19px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("m(t)  →  m[n]  →  Q{m[n]}  →  palabra binaria", width / 2, top + 302);
+      ctx.textAlign = "left";
+    }
+  }
+
   ctx.fillStyle = COLORS.text;
   ctx.font = "500 17px ui-sans-serif, sans-serif";
-  ctx.fillText("Las tres señales comparten el mismo instante de observación.", margin, height - 31);
+  ctx.textAlign = "left";
+  const footer = hasConstellation
+    ? "La evidencia incluye las tres señales y la constelación correspondiente."
+    : hasPcmProcess
+      ? "La evidencia incluye las tres gráficas y las etapas del proceso PCM."
+      : "Las tres señales comparten el mismo instante de observación.";
+  ctx.fillText(footer, margin, height - 31);
 
   const date = new Date().toISOString().slice(0, 10);
   const filename = `graficas-${state.mode === "QAM" ? `${state.qamOrder}-QAM` : state.mode}-${date}.png`;
@@ -1386,7 +1487,7 @@ function exportGraphsAsPng() {
     els.exportPng.setAttribute("aria-label", "PNG descargado");
     window.setTimeout(() => {
       els.exportPng.classList.remove("downloaded");
-      els.exportPng.setAttribute("aria-label", "Descargar las tres gráficas en formato PNG");
+      els.exportPng.setAttribute("aria-label", "Descargar evidencia gráfica en formato PNG");
     }, 1400);
   }, "image/png");
 }
