@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Laboratorio interactivo para explorar modulaciones analógicas, por pulsos y digitales.">
   <title>Laboratorio de Modulación</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,14 +13,6 @@
     <div>
       <p class="eyebrow">Telecomunicaciones · Laboratorio interactivo</p>
       <h1>Modulación de señales</h1>
-    </div>
-    <div class="top-actions" aria-label="Controles de animación">
-      <button id="playPause" class="icon-button primary" type="button" aria-label="Pausar animación">
-        <span id="playIcon" aria-hidden="true">Ⅱ</span><span id="playText">Pausar</span>
-      </button>
-      <button id="resetAnimation" class="icon-button" type="button" aria-label="Reiniciar animación">
-        <span aria-hidden="true">↺</span><span>Reiniciar</span>
-      </button>
     </div>
   </header>
 
@@ -91,11 +84,11 @@
       <div class="workspace">
       <aside class="control-panel">
         <div class="panel-heading">
-          <div>
+          <div class="panel-heading-topline">
             <p class="section-kicker">Experimenta</p>
-            <h2>Controles</h2>
+            <button id="defaultsButton" class="text-button" type="button">Valores predeterminados</button>
           </div>
-          <button id="defaultsButton" class="text-button" type="button">Valores predeterminados</button>
+          <h2>Controles</h2>
         </div>
 
         <div id="bitInputGroup" class="control-group hidden">
@@ -126,6 +119,9 @@
           </div>
           <div class="scope-actions">
             <div class="time-status"><span class="live-dot"></span><span id="timeStatus">Animación activa</span></div>
+            <button id="playPause" class="animation-button" type="button" aria-label="Pausar animación">
+              <span id="playIcon" aria-hidden="true">Ⅱ</span><span id="playText">Pausar</span>
+            </button>
             <button id="exportPng" class="export-button" type="button" title="Descargar evidencia gráfica en PNG" aria-label="Descargar evidencia gráfica en formato PNG">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M7 14h10v7H7z"/>

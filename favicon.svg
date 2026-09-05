@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+  <title id="title">Laboratorio de modulación</title>
+  <desc id="description">Cuatro cuadros de colores tenues con una señal senoidal al centro.</desc>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#f8fafc" stroke="#dfe5ee" stroke-width="3"/>
+  <rect x="10" y="10" width="20" height="20" rx="5" fill="#f7c7b1"/>
+  <rect x="34" y="10" width="20" height="20" rx="5" fill="#b9e7eb"/>
+  <rect x="10" y="34" width="20" height="20" rx="5" fill="#cbdced"/>
+  <rect x="34" y="34" width="20" height="20" rx="5" fill="#d9d0f7"/>
+  <path d="M7 32c4.2-9.5 8.3-9.5 12.5 0s8.3 9.5 12.5 0 8.3-9.5 12.5 0S52.8 41.5 57 32" fill="none" stroke="#17375e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

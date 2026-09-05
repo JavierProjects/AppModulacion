@@ -13,6 +13,7 @@ El simulador permite modificar parámetros en tiempo real y observar de forma si
 ## Funciones principales
 
 - Tres gráficas sincronizadas para comparar las señales.
+- Control contextual para pausar o reiniciar la animación junto a su indicador de estado.
 - Controles interactivos con límites máximos editables.
 - Secuencias binarias personalizables para modulaciones digitales.
 - Constelaciones para BPSK y QAM.
@@ -48,6 +49,7 @@ También puedes abrir `index.html` directamente en un navegador moderno. No es n
 
 ```text
 AppModulacion/
+├── favicon.svg # Icono de la aplicación para la pestaña del navegador
 ├── index.html   # Estructura y contenido de la interfaz
 ├── styles.css   # Diseño visual y adaptación a distintos tamaños
 ├── app.js       # Simulación, gráficas, prácticas y exportación

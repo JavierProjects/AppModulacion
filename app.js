@@ -358,7 +358,6 @@ const els = {
   playPause: document.querySelector("#playPause"),
   playIcon: document.querySelector("#playIcon"),
   playText: document.querySelector("#playText"),
-  resetAnimation: document.querySelector("#resetAnimation"),
   defaultsButton: document.querySelector("#defaultsButton"),
   randomBits: document.querySelector("#randomBits"),
   bitHelp: document.querySelector("#bitHelp"),
@@ -1263,9 +1262,10 @@ function drawAll() {
 
 function setPlaying(playing) {
   state.playing = playing;
-  els.playIcon.textContent = playing ? "Ⅱ" : "▶";
-  els.playText.textContent = playing ? "Pausar" : "Reproducir";
-  els.playPause.setAttribute("aria-label", playing ? "Pausar animación" : "Reproducir animación");
+  els.playIcon.textContent = playing ? "Ⅱ" : "↺";
+  els.playText.textContent = playing ? "Pausar" : "Reiniciar";
+  els.playPause.setAttribute("aria-label", playing ? "Pausar animación" : "Reiniciar animación");
+  els.playPause.classList.toggle("restart", !playing);
   els.timeStatus.textContent = playing ? "Animación activa" : "Animación pausada";
   document.querySelector(".live-dot").classList.toggle("paused", !playing);
 }
@@ -1519,8 +1519,15 @@ els.randomBits.addEventListener("click", () => {
   drawAll();
 });
 
-els.playPause.addEventListener("click", () => setPlaying(!state.playing));
-els.resetAnimation.addEventListener("click", () => { state.playhead = 0; drawAll(); });
+els.playPause.addEventListener("click", () => {
+  if (state.playing) {
+    setPlaying(false);
+    return;
+  }
+  state.playhead = 0;
+  setPlaying(true);
+  drawAll();
+});
 els.exportPng.addEventListener("click", exportGraphsAsPng);
 els.defaultsButton.addEventListener("click", resetDefaults);
 els.simulatorTabButton.addEventListener("click", () => switchView("simulator"));
