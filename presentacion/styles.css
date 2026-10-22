@@ -1598,35 +1598,29 @@ h2 {
   background: rgba(10, 35, 46, 0.68);
 }
 
-.app-mark {
-  position: relative;
+.repo-qr {
   width: 10rem;
-  height: 7rem;
+  aspect-ratio: 1;
   margin-bottom: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.4rem;
+  padding: 0.55rem;
+  border: 1px solid rgba(88, 222, 208, 0.38);
+  border-radius: 1rem;
+  display: block;
+  background: var(--ink);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+  transition: transform 160ms ease, border-color 160ms ease;
 }
 
-.app-mark > span {
-  border: 1px solid rgba(88, 222, 208, 0.23);
-  border-radius: 0.55rem;
-  background: rgba(88, 222, 208, 0.05);
+.repo-qr:hover {
+  border-color: var(--teal-bright);
+  transform: translateY(-2px);
 }
 
-.app-mark svg {
-  position: absolute;
-  inset: 1.8rem 0 0;
+.repo-qr img {
+  display: block;
   width: 100%;
-  height: 3.5rem;
-  filter: drop-shadow(0 0 8px rgba(88, 222, 208, 0.25));
-}
-
-.app-mark path {
-  fill: none;
-  stroke: var(--teal-bright);
-  stroke-width: 5;
-  stroke-linecap: round;
+  height: 100%;
+  border-radius: 0.45rem;
 }
 
 .closing-link p {
