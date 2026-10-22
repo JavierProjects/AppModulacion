@@ -1,5 +1,7 @@
 # Laboratorio interactivo de modulación
 
+[![Vista previa del Laboratorio interactivo de modulación](assets/app-preview.jpg)](https://javierprojects.github.io/AppModulacion/)
+
 Aplicación web educativa para explorar, comparar y practicar los fundamentos de las modulaciones analógicas, por pulsos y digitales de portadora.
 
 El simulador permite modificar parámetros en tiempo real y observar de forma sincronizada la señal de información, la referencia o portadora y la señal modulada. También incluye prácticas guiadas con pequeños experimentos y preguntas de opción múltiple.
@@ -59,4 +61,3 @@ AppModulacion/
 ## Alcance educativo
 
 La aplicación está pensada para introducir visualmente las características esenciales de cada técnica. Las escalas, señales y modelos buscan claridad didáctica; no sustituyen un simulador de ingeniería para diseño, medición o validación de sistemas reales.
-
