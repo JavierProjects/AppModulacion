@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07141f">
+    <meta
+      name="description"
+      content="Presentación del simulador web didáctico para el aprendizaje de modulaciones analógicas y digitales."
+    >
+    <title>Simulador web didáctico de modulación</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="presentation-shell">
+      <header class="presenter-bar" aria-label="Controles de la presentación">
+        <div class="presenter-brand">
+          <span class="brand-pulse" aria-hidden="true"></span>
+          <span>REINGTEC 2026</span>
+        </div>
+
+        <div class="presenter-actions">
+          <button class="timer" id="timer" type="button" title="Iniciar o pausar el temporizador (T)">
+            <span class="timer-dot" aria-hidden="true"></span>
+            <span id="timerValue">12:00</span>
+          </button>
+          <button class="icon-button" id="notesButton" type="button" title="Mostrar notas (N)" aria-pressed="false">
+            <span aria-hidden="true">N</span>
+            <span class="sr-only">Mostrar notas del presentador</span>
+          </button>
+          <button class="icon-button" id="fullscreenButton" type="button" title="Pantalla completa (F)">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path>
+            </svg>
+            <span class="sr-only">Activar pantalla completa</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-value" id="progressValue"></div>
+      </div>
+
+      <main class="deck" id="deck">
+        <section class="slide slide-cover is-active" data-title="Portada del congreso" data-time="0:15" aria-hidden="false">
+          <div class="stars" aria-hidden="true"></div>
+          <svg class="cover-waves" viewBox="0 0 1600 420" preserveAspectRatio="none" aria-hidden="true">
+            <path class="wave wave-a" d="M-40 290 C180 80 330 390 560 210 S930 50 1170 225 S1440 370 1640 125"></path>
+            <path class="wave wave-b" d="M-40 345 C180 175 355 420 600 280 S980 140 1220 285 S1480 390 1640 230"></path>
+            <path class="wave wave-c" d="M-40 225 C185 30 345 335 585 155 S950 5 1190 170 S1470 320 1640 65"></path>
+          </svg>
+
+          <div class="cover-layout">
+            <div class="event-emblem" aria-hidden="true">
+              <svg viewBox="0 0 220 220">
+                <circle cx="110" cy="110" r="92"></circle>
+                <path class="emblem-wave" d="M32 104 C52 78 70 132 90 104 S128 76 148 104 S184 132 194 104"></path>
+                <path class="emblem-leaf" d="M110 166 C109 128 137 111 168 115 C164 145 142 164 110 166Z"></path>
+                <path class="emblem-leaf" d="M110 166 C111 133 88 118 58 121 C62 148 82 164 110 166Z"></path>
+                <path class="emblem-stem" d="M110 164 L110 190"></path>
+              </svg>
+            </div>
+
+            <div class="cover-copy">
+              <p class="eyebrow">Edición 2026</p>
+              <h1>Congreso de Ingeniería y Tecnologías para el <span>Desarrollo Sostenible</span></h1>
+              <div class="event-date">
+                <strong>Programa</strong>
+                <span>21, 22 y 23 de octubre de 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="cover-author">
+            <strong>Dr. Francisco Javier Cuadros Romero</strong>
+            <span>Ingeniería en Tecnologías de la Información y Comunicaciones</span>
+          </footer>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 15 segundos.</p>
+            <p>Dar la bienvenida y agradecer la invitación. No explicar todavía la aplicación.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-title" data-title="Título del trabajo" data-time="0:25" aria-hidden="true">
+          <div class="signal-orbit signal-orbit-one" aria-hidden="true"></div>
+          <div class="signal-orbit signal-orbit-two" aria-hidden="true"></div>
+          <div class="title-content">
+            <p class="eyebrow">Trabajo presentado</p>
+            <h2>Simulador web didáctico para el aprendizaje de modulaciones analógicas y digitales</h2>
+
+            <div class="author-grid">
+              <article class="author-card author-primary">
+                <span class="author-role">Autor principal</span>
+                <strong>Dr. Francisco Javier Cuadros Romero</strong>
+              </article>
+              <article class="author-card">
+                <span class="author-role">Coautor</span>
+                <strong>José Martín Oropeza Méndez</strong>
+              </article>
+              <article class="author-card">
+                <span class="author-role">Coautor</span>
+                <strong>Humberto Giovany Neri Pérez</strong>
+              </article>
+            </div>
+
+            <p class="institution-line">
+              Ingeniería en Tecnologías de la Información y Comunicaciones<br>
+              Tecnológico Nacional de México · ITS del Occidente del Estado de Hidalgo
+            </p>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 25 segundos.</p>
+            <p>Presentar el título y a los coautores. Adelantar que se mostrará la aplicación en funcionamiento.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-definition" data-title="Qué es modulación" data-time="0:55" aria-hidden="true">
+          <header class="slide-heading">
+            <p class="eyebrow">Punto de partida</p>
+            <h2>¿Qué es modulación?</h2>
+            <p class="lead">Es hacer que una señal portadora cambie de acuerdo con la información que queremos transmitir.</p>
+          </header>
+
+          <div class="definition-layout">
+            <div class="signal-stack" aria-label="Representación de información, portadora y señal modulada">
+              <div class="signal-row signal-information">
+                <div class="signal-label"><span>01</span> Información</div>
+                <svg viewBox="0 0 620 96" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 48 C52 5 102 5 154 48 S257 91 309 48 S412 5 464 48 S568 91 620 48"></path>
+                </svg>
+              </div>
+              <div class="signal-row signal-carrier">
+                <div class="signal-label"><span>02</span> Portadora</div>
+                <svg viewBox="0 0 620 96" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 48 C12 8 25 8 38 48 S64 88 77 48 S102 8 115 48 S141 88 154 48 S180 8 193 48 S218 88 231 48 S257 8 270 48 S296 88 309 48 S334 8 347 48 S373 88 386 48 S412 8 425 48 S450 88 463 48 S489 8 502 48 S528 88 541 48 S567 8 580 48 S607 88 620 48"></path>
+                </svg>
+              </div>
+              <div class="signal-row signal-modulated">
+                <div class="signal-label"><span>03</span> Resultado</div>
+                <svg viewBox="0 0 620 96" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 48 C12 13 25 13 38 48 S64 82 77 48 S102 2 115 48 S141 94 154 48 S180 19 193 48 S218 77 231 48 S257 32 270 48 S296 64 309 48 S334 30 347 48 S373 67 386 48 S412 15 425 48 S450 84 463 48 S489 3 502 48 S528 93 541 48 S567 18 580 48 S607 79 620 48"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="definition-copy">
+              <p>No cambiamos el mensaje: lo <strong>adaptamos</strong> para que pueda viajar por el medio de transmisión.</p>
+              <div class="change-list">
+                <span><i class="dot dot-orange"></i>Amplitud</span>
+                <span><i class="dot dot-teal"></i>Frecuencia</span>
+                <span><i class="dot dot-purple"></i>Fase</span>
+              </div>
+              <p class="plain-language">La idea matemática puede ser compleja. La idea visual es sencilla: <strong>observar qué cambia y por qué.</strong></p>
+            </div>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 55 segundos.</p>
+            <p>Explicar para estudiantes de primeros semestres: la información modifica alguna propiedad de una portadora. Señalar las tres filas y después amplitud, frecuencia y fase.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-problem" data-title="El problema de enseñanza" data-time="1:05" aria-hidden="true">
+          <header class="slide-heading compact">
+            <p class="eyebrow">Motivación</p>
+            <h2>Entre el pizarrón y el formalismo matemático falta un puente</h2>
+          </header>
+
+          <div class="problem-grid">
+            <article class="problem-card chalk-card">
+              <div class="problem-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path d="M8 12h48v34H8zM18 54h28M24 46l-5 8M40 46l5 8"></path>
+                  <path class="accent" d="M14 31c7-14 12 14 19 0s12 14 19 0"></path>
+                </svg>
+              </div>
+              <p class="problem-number">Extremo 01</p>
+              <h3>Explicar tres señales a la vez</h3>
+              <p>En el pizarrón resulta difícil mostrar de forma sincronizada qué cambia en cada instante.</p>
+            </article>
+
+            <article class="problem-card book-card">
+              <div class="problem-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path d="M10 12h17c5 0 8 3 8 8v33c0-5-3-8-8-8H10zM54 12H37v41c0-5 3-8 8-8h9z"></path>
+                  <path class="accent" d="M16 21h12M16 28h9M42 21h7M42 28h9"></path>
+                </svg>
+              </div>
+              <p class="problem-number">Extremo 02</p>
+              <h3>Comenzar directamente con ecuaciones</h3>
+              <p>El rigor es necesario, pero puede ser denso cuando todavía no existe una representación intuitiva.</p>
+            </article>
+          </div>
+
+          <div class="bridge-statement">
+            <span>El puente que buscamos</span>
+            <strong>Intuición primero. Formalización después.</strong>
+          </div>
+
+          <p class="citation-line">De Jong y Van Joolingen, 1998 · Rutten et al., 2012 · Wieman et al., 2008</p>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 1 minuto 5 segundos.</p>
+            <p>No presentar los libros como un problema: aclarar que son necesarios. El problema es el orden de entrada para un estudiante que aún no visualiza el fenómeno.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-hypothesis" data-title="Hipótesis de diseño" data-time="0:50" aria-hidden="true">
+          <header class="slide-heading centered">
+            <p class="eyebrow">Hipótesis de diseño</p>
+            <h2>Un simulador por sí solo no garantiza aprendizaje</h2>
+            <p class="lead">La exploración necesita intención, orientación y una forma breve de comprobar lo comprendido.</p>
+          </header>
+
+          <div class="learning-flow" aria-label="Flujo explorar, guiar y comprobar">
+            <article class="flow-step">
+              <span class="flow-index">01</span>
+              <div class="flow-symbol flow-symbol-wave" aria-hidden="true"></div>
+              <h3>Experimentar</h3>
+              <p>Modificar parámetros y observar consecuencias.</p>
+            </article>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <article class="flow-step">
+              <span class="flow-index">02</span>
+              <div class="flow-symbol flow-symbol-path" aria-hidden="true"></div>
+              <h3>Guiar</h3>
+              <p>Proponer tareas concretas y pedir predicciones.</p>
+            </article>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <article class="flow-step">
+              <span class="flow-index">03</span>
+              <div class="flow-symbol flow-symbol-check" aria-hidden="true">✓</div>
+              <h3>Comprobar</h3>
+              <p>Responder tres preguntas por cada modulación.</p>
+            </article>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 50 segundos.</p>
+            <p>Explicar que el valor diferencial no es el simulador aislado, sino la integración de estas tres capas.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-solution" data-title="La solución" data-time="1:15" aria-hidden="true">
+          <div class="solution-copy">
+            <header class="slide-heading compact">
+              <p class="eyebrow">La solución</p>
+              <h2>Una experiencia completa dentro del navegador</h2>
+            </header>
+
+            <div class="feature-list">
+              <article>
+                <strong>13</strong>
+                <span>esquemas de modulación</span>
+              </article>
+              <article>
+                <strong>3</strong>
+                <span>gráficas sincronizadas</span>
+              </article>
+              <article>
+                <strong>33</strong>
+                <span>microexperimentos guiados</span>
+              </article>
+              <article>
+                <strong>0</strong>
+                <span>dependencias externas</span>
+              </article>
+            </div>
+
+            <ul class="clean-list">
+              <li>Modulación analógica, por pulsos y digital de portadora.</li>
+              <li>Constelaciones para PSK y QAM; etapas del proceso PCM.</li>
+              <li>Exportación PNG para integrar evidencias al reporte.</li>
+              <li>Ejecución local cuando la conectividad es inestable.</li>
+            </ul>
+          </div>
+
+          <div class="browser-frame" aria-label="Vista previa de la aplicación">
+            <div class="browser-chrome">
+              <span></span><span></span><span></span>
+              <div class="address">Laboratorio interactivo de modulación</div>
+            </div>
+            <iframe src="../index.html" title="Vista previa del simulador de modulación" loading="lazy" tabindex="-1"></iframe>
+            <div class="browser-shield" aria-hidden="true"></div>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 1 minuto 15 segundos.</p>
+            <p>Presentar el alcance sin enumerar las trece técnicas. Destacar que funciona localmente y que la guía está integrada.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-demo" data-title="Demostración" data-time="3:00" aria-hidden="true">
+          <header class="slide-heading compact">
+            <p class="eyebrow">Demostración en vivo · 3 minutos</p>
+            <h2>De mover un parámetro a explicar un fenómeno</h2>
+          </header>
+
+          <div class="demo-layout">
+            <ol class="demo-script">
+              <li>
+                <span class="demo-time">1:00</span>
+                <div>
+                  <strong>AM: hacer visible la relación causal</strong>
+                  <p>Modificar el índice de modulación y comparar información, portadora y resultado.</p>
+                </div>
+              </li>
+              <li>
+                <span class="demo-time">1:00</span>
+                <div>
+                  <strong>Práctica guiada: convertir exploración en tarea</strong>
+                  <p>Mostrar un microexperimento, la predicción solicitada y las tres preguntas.</p>
+                </div>
+              </li>
+              <li>
+                <span class="demo-time">1:00</span>
+                <div>
+                  <strong>16-QAM: constelación y evidencia</strong>
+                  <p>Cambiar la secuencia, observar símbolos y exportar la visualización en PNG.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="demo-launch">
+              <div class="demo-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p>La presentación permanecerá abierta en esta pestaña.</p>
+              <a class="primary-action" href="../index.html" target="_blank" rel="noopener">
+                Abrir simulador
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h11v11M19 5 5 19"></path></svg>
+              </a>
+              <span class="keyboard-tip">Al terminar, regresa a esta pestaña y presiona →</span>
+            </div>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 3 minutos.</p>
+            <p>Ensayar esta secuencia completa. Si falla la apertura, continuar con la vista previa de la diapositiva anterior y explicar verbalmente los mismos tres pasos.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-method" data-title="Desarrollo iterativo" data-time="0:50" aria-hidden="true">
+          <header class="slide-heading centered compact">
+            <p class="eyebrow">Metodología de desarrollo</p>
+            <h2>Tres incrementos, cada uno utilizable</h2>
+          </header>
+
+          <div class="iteration-line" aria-label="Tres iteraciones del desarrollo">
+            <article class="iteration">
+              <span class="iteration-number">01</span>
+              <div class="iteration-marker"></div>
+              <h3>Visualizar</h3>
+              <p>Simulador, controles y tres gráficas sincronizadas.</p>
+            </article>
+            <article class="iteration">
+              <span class="iteration-number">02</span>
+              <div class="iteration-marker"></div>
+              <h3>Aprender</h3>
+              <p>Guías por modulación y tres reactivos de autoevaluación.</p>
+            </article>
+            <article class="iteration">
+              <span class="iteration-number">03</span>
+              <div class="iteration-marker"></div>
+              <h3>Evidenciar</h3>
+              <p>Ajustes de interfaz y exportación con constelaciones y PCM.</p>
+            </article>
+          </div>
+
+          <p class="method-caption">HTML · CSS · JavaScript · Canvas · Sin frameworks</p>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 50 segundos.</p>
+            <p>Explicar por qué el desarrollo fue iterativo: la guía, evaluación y exportación surgieron después del simulador inicial.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-classroom" data-title="Experiencia en aula" data-time="1:15" aria-hidden="true">
+          <header class="slide-heading compact">
+            <p class="eyebrow">Primera prueba exploratoria</p>
+            <h2>La aplicación llegó al aula</h2>
+          </header>
+
+          <div class="classroom-grid">
+            <div class="metric-card metric-students">
+              <strong>25</strong>
+              <span>estudiantes</span>
+              <small>quinto semestre</small>
+            </div>
+            <div class="metric-card">
+              <strong>2</strong>
+              <span>personas por equipo</span>
+              <small>trabajo colaborativo</small>
+            </div>
+            <div class="metric-card">
+              <strong>≈2 h</strong>
+              <span>de actividad</span>
+              <small>una sesión</small>
+            </div>
+          </div>
+
+          <div class="observation-strip">
+            <span class="observation-label">Fuente de información</span>
+            <p>Observación directa del docente y comentarios informales al finalizar.</p>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 1 minuto 15 segundos.</p>
+            <p>Describir la organización y el tiempo. Aclarar desde aquí que fue una prueba exploratoria, no un diseño experimental.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-results" data-title="Resultados y límites" data-time="1:15" aria-hidden="true">
+          <header class="slide-heading compact">
+            <p class="eyebrow">Resultados y discusión</p>
+            <h2>Lo observado y lo que todavía falta demostrar</h2>
+          </header>
+
+          <div class="results-grid">
+            <article class="results-column observed">
+              <span class="column-tag">Observado</span>
+              <ul>
+                <li>Actividad sostenida durante la sesión.</li>
+                <li>Predicciones antes de mover los controles.</li>
+                <li>Comparación y discusión de las señales.</li>
+                <li>Comentarios favorables sobre interfaz y guías.</li>
+              </ul>
+            </article>
+            <article class="results-column pending">
+              <span class="column-tag">Pendiente de medir</span>
+              <ul>
+                <li>Ganancia de aprendizaje mediante preprueba y posprueba.</li>
+                <li>Usabilidad mediante un instrumento validado.</li>
+                <li>Intentos, tiempos y dificultades por modulación.</li>
+                <li>Comparación con otra estrategia didáctica.</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="evidence-statement"><strong>Aceptación inicial y viabilidad operativa</strong> no equivalen todavía a eficacia demostrada.</p>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 1 minuto 15 segundos.</p>
+            <p>Destacar la conversación técnica entre parejas. Cerrar con la limitación: no presentar atención o comentarios como evidencia cuantitativa de aprendizaje.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-closing" data-title="Conclusiones" data-time="0:55" aria-hidden="true">
+          <div class="closing-grid">
+            <div class="closing-message">
+              <p class="eyebrow">Conclusión</p>
+              <h2>La aportación no es solo visualizar señales.</h2>
+              <p class="closing-lead">Es integrar <strong>experimentación</strong>, <strong>orientación</strong> y <strong>evaluación breve</strong> en un recurso ligero que puede funcionar sin conexión.</p>
+
+              <div class="next-steps">
+                <span>Siguiente etapa</span>
+                <p>Medir aprendizaje, usabilidad e iteraciones para mejorar cada guía.</p>
+              </div>
+            </div>
+
+            <div class="closing-link">
+              <div class="app-mark" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <svg viewBox="0 0 120 48"><path d="M0 24 C10 4 20 4 30 24 S50 44 60 24 S80 4 90 24 S110 44 120 24"></path></svg>
+              </div>
+              <p>Aplicación y código fuente</p>
+              <a href="https://github.com/JavierProjects/AppModulacion" target="_blank" rel="noopener">
+                <span>github.com/JavierProjects/</span>
+                <span>AppModulacion</span>
+              </a>
+              <strong>Gracias</strong>
+            </div>
+          </div>
+
+          <div class="speaker-notes">
+            <p><strong>Tiempo:</strong> 55 segundos.</p>
+            <p>Recuperar los tres componentes y terminar con una frase breve. Dejar visible el repositorio durante las preguntas.</p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="notes-panel" id="notesPanel" aria-hidden="true">
+        <div class="notes-heading">
+          <span>Notas del presentador</span>
+          <button id="closeNotesButton" type="button" aria-label="Cerrar notas">×</button>
+        </div>
+        <div id="notesContent"></div>
+      </aside>
+
+      <footer class="navigation-bar">
+        <button class="nav-button" id="previousButton" type="button" aria-label="Diapositiva anterior">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"></path></svg>
+        </button>
+        <div class="slide-status" aria-live="polite">
+          <span id="slideNumber">01</span>
+          <span class="slide-divider">/</span>
+          <span id="slideTotal">11</span>
+          <span class="slide-name" id="slideName">Portada del congreso</span>
+          <span class="slide-time" id="slideTime">0:20</span>
+        </div>
+        <button class="nav-button" id="nextButton" type="button" aria-label="Diapositiva siguiente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg>
+        </button>
+      </footer>
+
+      <div class="shortcut-hint" id="shortcutHint" aria-hidden="true">
+        <span>← → navegar</span>
+        <span>F pantalla completa</span>
+        <span>N notas</span>
+        <span>T tiempo</span>
+      </div>
+    </div>
+
+    <script src="presentation.js"></script>
+  </body>
+</html>
