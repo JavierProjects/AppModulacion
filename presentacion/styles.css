@@ -287,7 +287,7 @@ a:focus-visible {
 .eyebrow {
   margin: 0 0 0.75rem;
   color: var(--teal-bright);
-  font-size: clamp(0.68rem, 1vw, 0.9rem);
+  font-size: clamp(0.78rem, 1.1vw, 1rem);
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -612,12 +612,12 @@ h2 {
 }
 
 .cover-author strong {
-  font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
 }
 
 .cover-author span {
   color: var(--muted);
-  font-size: clamp(0.78rem, 1.2vw, 1rem);
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
 }
 
 /* Título */
@@ -666,21 +666,21 @@ h2 {
 
 .author-role {
   color: var(--muted-2);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
 .author-card strong {
-  font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
   line-height: 1.25;
 }
 
 .institution-line {
   margin: 1.4rem 0 0;
   color: var(--muted);
-  font-size: clamp(0.82rem, 1.15vw, 1rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   line-height: 1.45;
 }
 
@@ -771,7 +771,7 @@ h2 {
 
 .signal-label {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -899,7 +899,7 @@ h2 {
 
 .problem-number {
   color: var(--muted-2);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -934,7 +934,7 @@ h2 {
 
 .bridge-statement span {
   color: var(--lime);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -947,7 +947,7 @@ h2 {
 .citation-line {
   margin: 0.65rem 0 0;
   color: var(--muted-2);
-  font-size: 0.66rem;
+  font-size: 0.76rem;
   text-align: right;
 }
 
@@ -985,7 +985,7 @@ h2 {
   top: 1.1rem;
   left: 1.2rem;
   color: var(--muted-2);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
 }
 
@@ -1032,7 +1032,7 @@ h2 {
 .flow-step p {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(0.86rem, 1.2vw, 1rem);
+  font-size: clamp(0.98rem, 1.35vw, 1.12rem);
   line-height: 1.45;
 }
 
@@ -1076,7 +1076,7 @@ h2 {
 
 .feature-list span {
   color: var(--muted);
-  font-size: clamp(0.72rem, 0.95vw, 0.88rem);
+  font-size: clamp(0.84rem, 1.08vw, 0.98rem);
 }
 
 .clean-list {
@@ -1086,7 +1086,7 @@ h2 {
   display: grid;
   gap: 0.68rem;
   color: var(--muted);
-  font-size: clamp(0.82rem, 1.05vw, 1rem);
+  font-size: clamp(0.94rem, 1.2vw, 1.1rem);
   line-height: 1.4;
 }
 
@@ -1212,7 +1212,7 @@ h2 {
 .demo-script p {
   margin: 0.3rem 0 0;
   color: var(--muted);
-  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  font-size: clamp(0.9rem, 1.15vw, 1.05rem);
   line-height: 1.4;
 }
 
@@ -1239,7 +1239,7 @@ h2 {
 .demo-launch p {
   max-width: 22rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .primary-action {
@@ -1266,7 +1266,7 @@ h2 {
 .keyboard-tip {
   margin-top: 1rem;
   color: var(--muted-2);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .demo-rings,
@@ -1321,7 +1321,7 @@ h2 {
 
 .iteration-number {
   color: var(--muted-2);
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.15em;
 }
@@ -1348,7 +1348,7 @@ h2 {
   max-width: 22rem;
   margin: 0 auto;
   color: var(--muted);
-  font-size: clamp(0.82rem, 1.12vw, 1rem);
+  font-size: clamp(0.96rem, 1.3vw, 1.12rem);
   line-height: 1.48;
 }
 
@@ -1358,7 +1358,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1405,7 +1405,7 @@ h2 {
 .metric-card small {
   margin-top: 0.35rem;
   color: var(--muted-2);
-  font-size: clamp(0.72rem, 0.95vw, 0.85rem);
+  font-size: clamp(0.84rem, 1.05vw, 0.95rem);
 }
 
 .metric-students {
@@ -1431,7 +1431,7 @@ h2 {
 .observation-label {
   flex: 0 0 auto;
   color: var(--gold);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -1440,7 +1440,7 @@ h2 {
 .observation-strip p {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-size: clamp(0.92rem, 1.18vw, 1.05rem);
 }
 
 /* Resultados */
@@ -1479,7 +1479,7 @@ h2 {
   border-radius: 999px;
   color: var(--teal-bright);
   background: rgba(88, 222, 208, 0.08);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1574,7 +1574,7 @@ h2 {
 
 .next-steps span {
   color: var(--lime);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -1583,6 +1583,7 @@ h2 {
 .next-steps p {
   margin: 0.5rem 0 0;
   color: var(--muted);
+  font-size: 1.05rem;
 }
 
 .closing-link {
@@ -1631,7 +1632,7 @@ h2 {
 .closing-link p {
   margin-bottom: 0.55rem;
   color: var(--muted-2);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -1639,7 +1640,7 @@ h2 {
 
 .closing-link a {
   color: var(--teal-bright);
-  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
 }
 
 .closing-link a span {
